@@ -1,6 +1,5 @@
 import axios from 'axios'
 export const TokenProtected = (userData)=>{
-    console.log('token is', userData)
     return (dispatch, getState)=>{
         //async function
         axios.get('/api/user/tasks', {
@@ -8,7 +7,6 @@ export const TokenProtected = (userData)=>{
               'auth_token': userData
             }
           }).then( response=>{
-            console.log(response);
             dispatch({type:'auth-user', payload:response})
         })
         .catch(err=>{

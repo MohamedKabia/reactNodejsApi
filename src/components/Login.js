@@ -20,7 +20,6 @@ export class Login extends Component {
    }
   handleLogin = (e) =>{
     e.preventDefault()
-    console.log(this.state.token)
     const userData = {
       email:this.state.email,
       password:this.state.password

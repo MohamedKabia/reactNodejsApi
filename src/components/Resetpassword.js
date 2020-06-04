@@ -23,7 +23,6 @@ export class Resetpassword extends Component {
         const email = {
           email:this.state.email,
         }
-        console.log(email)
         this.props.resetPassword(email)
       }
     render() {

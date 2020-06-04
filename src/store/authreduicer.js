@@ -2,8 +2,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const token = Cookies.get('auth_biscute');
-console.log(token);
-
 const instate={
     user:token,
     message: 'welcome',
@@ -26,7 +24,6 @@ const authReduicer = (state = instate, action) =>{
         }
     case 'create-user':
       axios.post('/api/user/register', action.payload).then( response=>{
-        console.log(response)
        return{
          ...state,
          user:response.data,
@@ -34,10 +31,9 @@ const authReduicer = (state = instate, action) =>{
        }
       })
       .catch(err=>{
-        console.log(err)
         return{
           ...state,
-          message:'Account not created'
+          message:'Account not created. ' + err
         }
       })
       case 'logout':
@@ -47,24 +43,23 @@ const authReduicer = (state = instate, action) =>{
           user:null
         }
       case 'resetpassword-err':
-        console.log('invalid email',action.err);
-        return state;
+        return state ={
+          ...state,
+          message:action.err
+        };
 
       case 'get-vCode':
-        console.log('email sent to ', action.payload)
         return state ={
           ...state,
           email:action.payload
         }
 
       case 'reset-password':
-        console.log('email sent to ', action.payload)
         return state ={
           ...state,
           email:null
         }
       case 'auth-user':
-        console.log(action.payload)
         return state ={
           ...state,
           message:'Acess granted. welcome back ' + action.payload.data.user.name
